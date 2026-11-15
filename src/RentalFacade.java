@@ -1,12 +1,9 @@
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class RentalFacade {
 
     private final Map<Integer, Vehicle> fleet = new HashMap<>();
-    private final Set<Integer> rentedIds = new HashSet<>();
     private PricingStrategy pricingStrategy = new DailyPricing();
     public void addVehicle(VehicleType type, int id, String model) {
         if (fleet.containsKey(id)) {
@@ -35,17 +32,16 @@ public class RentalFacade {
         return offer;
     }
     public RentalOffer rentVehicle(int vehicleId, int units, Extra... extras) {
-        if (rentedIds.contains(vehicleId)) {
-            throw new IllegalStateException("Vehicle " + vehicleId + " is already rented");
-        }
+        Vehicle vehicle = findVehicle(vehicleId);
         RentalOffer offer = getQuote(vehicleId, units, extras);
-        rentedIds.add(vehicleId);
-        return offer;}
+        vehicle.rent();
+        return offer;
+    }
     public void returnVehicle(int vehicleId) {
-        findVehicle(vehicleId);
-        if (!rentedIds.remove(vehicleId)) {
-            throw new IllegalStateException("Vehicle " + vehicleId + " is not rented");
-        }
+        findVehicle(vehicleId).returnVehicle();
+    }
+    public String getVehicleState(int vehicleId) {
+        return findVehicle(vehicleId).getStateName();
     }
     private Vehicle findVehicle(int id) {
         Vehicle vehicle = fleet.get(id);

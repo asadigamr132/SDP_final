@@ -4,4 +4,12 @@ public interface Vehicle {
     String getModel();
 
     String getType();
+
+    void rent();
+
+    void returnVehicle();
+
+    boolean isAvailable();
+
+    String getStateName();
 }
