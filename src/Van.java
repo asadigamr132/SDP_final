@@ -6,6 +6,6 @@ public class Van extends AbstractVehicle {
 
     @Override
     public String getType() {
-        return "CAR";
+        return "VAN";
     }
 }
