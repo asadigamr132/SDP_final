@@ -7,20 +7,20 @@ public class Main {
 
         RentalFacade facade = new RentalFacade();
 
-        // 1. FACTORY METHOD
+
         System.out.println("\n1. FACTORY METHOD");
         VehicleFactory carFactory = new CarFactory();
         Vehicle previewCar = carFactory.createVehicle(99, "Toyota Camry");
         System.out.println("Created by CarFactory: "
                 + previewCar.getModel() + " (" + previewCar.getType() + ")");
 
-        // The facade also uses the registered concrete factories internally.
+
         facade.addVehicle(VehicleType.CAR, 1, "Toyota Camry");
         facade.addVehicle(VehicleType.BIKE, 2, "Trek FX");
         facade.addVehicle(VehicleType.VAN, 3, "Ford Transit");
         System.out.println("Fleet created through RentalFacade.");
 
-        // 2. STRATEGY
+
         System.out.println("\n2. STRATEGY");
         facade.setPricingStrategy(new DailyPricing());
         printOffer("Daily pricing", facade.getQuote(1, 2));
@@ -28,7 +28,7 @@ public class Main {
         facade.setPricingStrategy(new HourlyPricing());
         printOffer("Hourly pricing", facade.getQuote(1, 5));
 
-        // 3. BUILDER
+
         System.out.println("\n3. BUILDER");
         Customer renter = new Customer("Altair");
         RentalRequest request = new RentalRequest.Builder(renter, 1, 2)
@@ -40,7 +40,7 @@ public class Main {
         System.out.println("Rental request built for: "
                 + request.getCustomer().getName());
 
-        // 4. FACADE + 5. DECORATOR
+
         System.out.println("\n4. FACADE");
         System.out.println("All rental operations are performed through RentalFacade.");
 
@@ -50,7 +50,7 @@ public class Main {
         printOffer("Daily rental with insurance and roadside assistance",
                 decoratedOffer);
 
-        // 6. OBSERVER
+
         System.out.println("\n6. OBSERVER");
         Customer firstSubscriber = new Customer("Olzhas");
         Customer secondSubscriber = new Customer("Alisher");
@@ -59,7 +59,7 @@ public class Main {
         facade.unsubscribe(1, secondSubscriber);
         System.out.println("Olzhas subscribed; Alisher unsubscribed.");
 
-        // 7. STATE
+
         System.out.println("\n7. STATE");
         System.out.println("State before rental: " + facade.getVehicleState(1));
 

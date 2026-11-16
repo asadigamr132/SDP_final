@@ -132,6 +132,15 @@ Solid arrows show stored references, and dotted arrows show dependencies such as
 
 ![Vehicle rental class diagram](docs/rental-system.png)
 
+### Factory
+Factory Method: Creates different types of vehicles (Car, Bike, Van) through dedicated factories, separating object creation from the main application logic.
+
+![Factory class diagram](docs/factory.png)
+
+### Decorator
+Decorator: Dynamically adds extra services (insurance and roadside assistance) to a rental offer, modifying its price and description without changing the original object.
+![Decorator class diagram](docs/decorator.png)
+
 ### State
 
 Each vehicle delegates rent and return actions to its current state.
