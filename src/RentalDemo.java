@@ -21,6 +21,12 @@ public class RentalDemo {
             System.out.println("Rejected: " + e.getMessage());
         }
 
+        Customer customer = new Customer("Olzhas");
+        Customer secondCustomer = new Customer("Alisher");
+        facade.subscribe(1, customer);
+        facade.subscribe(1, secondCustomer);
+        facade.unsubscribe(1, secondCustomer);
+
         facade.returnVehicle(1);
         System.out.println("Returned vehicle 1");
         System.out.println("Vehicle 1 state: " + facade.getVehicleState(1));

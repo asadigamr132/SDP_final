@@ -4,6 +4,7 @@ import java.util.Map;
 public class RentalFacade {
 
     private final Map<Integer, Vehicle> fleet = new HashMap<>();
+    private final AvailabilityNotifier notifier = new AvailabilityNotifier();
     private PricingStrategy pricingStrategy = new DailyPricing();
     public void addVehicle(VehicleType type, int id, String model) {
         if (fleet.containsKey(id)) {
@@ -38,7 +39,17 @@ public class RentalFacade {
         return offer;
     }
     public void returnVehicle(int vehicleId) {
-        findVehicle(vehicleId).returnVehicle();
+        Vehicle vehicle = findVehicle(vehicleId);
+        vehicle.returnVehicle();
+        notifier.notifyAvailable(vehicle);
+    }
+    public void subscribe(int vehicleId, VehicleObserver observer) {
+        findVehicle(vehicleId);
+        notifier.subscribe(vehicleId, observer);
+    }
+    public void unsubscribe(int vehicleId, VehicleObserver observer) {
+        findVehicle(vehicleId);
+        notifier.unsubscribe(vehicleId, observer);
     }
     public String getVehicleState(int vehicleId) {
         return findVehicle(vehicleId).getStateName();
