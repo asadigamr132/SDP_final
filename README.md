@@ -1,55 +1,132 @@
-# Vehicle rental service
+# Vehicle Rental Service
 
-We built a vehicle rental service in Java to practice design patterns. Customers can rent a car, bike, or van, choose hourly or daily pricing, and add insurance or roadside assistance. They can also subscribe to a vehicle and get a message when it is returned. The program runs in the console and keeps its data in memory.
+A console-based vehicle rental service written in Java. The project demonstrates seven design patterns working together: Factory Method, Strategy, Decorator, Facade, State, Observer, and Builder.
 
-## Run
+Customers can rent cars, bikes, and vans, choose hourly or daily pricing, add insurance or roadside assistance, and subscribe to a vehicle to receive a notification when it is returned. The application stores its data in memory.
 
-Install JDK 17 or newer. From the project folder, run:
+## Requirements
+
+- JDK 17 or newer
+- A terminal or an IDE such as IntelliJ IDEA
+
+The project does not require external libraries or a build tool.
+
+## How to Run
+
+Open a terminal in the project root directory and compile the source files:
 
 ```bash
 javac --release 17 -d out src/*.java
+```
+
+Run the complete demonstration:
+
+```bash
+java -cp out Main
+```
+
+**Run `Main` for the full demonstration.** It first shows Factory Method and Decorator, then starts `RentalDemo`, which demonstrates the complete rental flow through the facade.
+
+You can also run only the rental-system scenario:
+
+```bash
 java -cp out RentalDemo
 ```
 
-`RentalDemo` runs the full example. `Main` is a shorter example of creating a vehicle and adding extras. Run it with `java -cp out Main`.
+In IntelliJ IDEA, open the project, set the Project SDK to JDK 17 or newer, then run `src/Main.java`.
 
-## Patterns
+## Design Patterns
 
 | Pattern | Main classes | Purpose |
 | --- | --- | --- |
-| Simple Factory | `VehicleFactory`, `Car`, `Bike`, `Van` | Creates a vehicle from its type. |
-| Strategy | `PricingStrategy`, `HourlyPricing`, `DailyPricing` | Calculates the base price by hour or day. |
-| Decorator | `RentalOffer`, `RentalDecorator`, `InsuranceDecorator`, `RoadsideAssistanceDecorator` | Adds extras to the base offer. |
-| Facade | `RentalFacade` | Provides methods for quotes, rentals, returns, and subscriptions. |
-| State | `VehicleState`, `AvailableState`, `RentedState` | Allows renting an available vehicle and returning a rented vehicle. |
-| Observer | `AvailabilityNotifier`, `VehicleObserver`, `Customer` | Notifies customers subscribed to a returned vehicle. |
-| Builder | `RentalRequest.Builder`, `RentalRequest` | Builds a rental request with customer details, extras, and pickup information. |
+| **Factory Method** | `VehicleFactory`, `CarFactory`, `BikeFactory`, `VanFactory` | Defines a vehicle-creation method in an abstract creator. Each concrete factory decides which vehicle class to instantiate. |
+| **Strategy** | `PricingStrategy`, `HourlyPricing`, `DailyPricing` | Allows the rental price calculation to change between hourly and daily pricing. |
+| **Decorator** | `RentalOffer`, `RentalDecorator`, `InsuranceDecorator`, `RoadsideAssistanceDecorator` | Adds optional services and their costs to a base rental offer without changing the original offer class. |
+| **Facade** | `RentalFacade` | Provides one simple interface for vehicle creation, quotes, rentals, returns, and subscriptions. |
+| **State** | `VehicleState`, `AvailableState`, `RentedState` | Controls vehicle behavior according to its current availability. It rejects renting an already rented vehicle and returning an available vehicle. |
+| **Observer** | `AvailabilityNotifier`, `VehicleObserver`, `Customer` | Notifies subscribed customers when a vehicle is successfully returned. |
+| **Builder** | `RentalRequest.Builder`, `RentalRequest` | Builds a rental request with customer, vehicle, duration, extras, pickup location, and notes. |
 
-`VehicleFactory` uses a static method and a switch, so it is a Simple Factory. Factory Method and Abstract Factory use different structures.
+### Factory Method Structure
 
-## Work distribution
+`VehicleFactory` is the abstract creator and declares the `createVehicle(id, model)` factory method. `CarFactory`, `BikeFactory`, and `VanFactory` override that method to create their corresponding concrete products.
+
+The `RentalFacade` keeps a mapping from `VehicleType` to the appropriate concrete factory. When `addVehicle()` is called, the facade selects the creator and delegates object creation to its factory method. There is no static creation method with a switch statement.
+
+This makes the implementation Factory Method rather than Simple Factory: the creation operation is declared by an abstract creator and implemented by concrete creator subclasses.
+
+## Application Flow
+
+The full demo performs the following steps:
+
+1. Creates a car through `CarFactory` to demonstrate Factory Method.
+2. Wraps a base rental offer with insurance and roadside assistance decorators.
+3. Creates a fleet containing a car, a bike, and a van through `RentalFacade`.
+4. Calculates quotes using daily and hourly pricing strategies.
+5. Builds a rental request with a customer, vehicle, duration, extras, pickup location, and notes.
+6. Calculates the request quote and rents the selected vehicle.
+7. Attempts to rent the same vehicle again and demonstrates that the State pattern rejects the operation.
+8. Subscribes two customers to the vehicle, then unsubscribes one of them.
+9. Returns the vehicle and notifies the remaining subscriber through the Observer pattern.
+
+### Example Rental Calculation
+
+The demo rents a car for two days:
+
+- Base rental: 10,000 tenge × 2 days = 20,000 tenge
+- Insurance: 2,000 tenge
+- Roadside assistance: 1,500 tenge
+- **Total: 23,500 tenge**
+
+Each extra is charged once per rental.
+
+Building a request or checking a quote does not change the vehicle state. A successful rental changes the state to `Rented`; returning it changes the state back to `Available`. Customers remain subscribed until they unsubscribe.
+
+## Project Structure
+
+```text
+src/
+├── Main.java
+├── RentalDemo.java
+├── Vehicle.java
+├── AbstractVehicle.java
+├── Car.java
+├── Bike.java
+├── Van.java
+├── VehicleType.java
+├── VehicleFactory.java
+├── CarFactory.java
+├── BikeFactory.java
+├── VanFactory.java
+├── RentalFacade.java
+├── RentalRequest.java
+├── VehicleState.java
+├── AvailableState.java
+├── RentedState.java
+├── VehicleObserver.java
+├── AvailabilityNotifier.java
+├── Customer.java
+├── PricingStrategy.java
+├── HourlyPricing.java
+├── DailyPricing.java
+├── RentalOffer.java
+├── BaseRentalOffer.java
+├── RentalDecorator.java
+├── InsuranceDecorator.java
+└── RoadsideAssistanceDecorator.java
+```
+
+## Team Contributions
 
 | Student | Patterns | Contribution |
 | --- | --- | --- |
-| Abdraissov Altair | Simple Factory, Decorator | Wrote the vehicle classes and factory, added insurance and roadside assistance decorators, and created the first `Main` example. |
-| Alimbayev Alisher | Strategy, Facade | Added hourly and daily pricing and connected vehicle creation, pricing, and extras through the facade. Created `RentalDemo` and fixed the van type. |
-| Assemgazy Olzhas | State, Observer, Builder | Added vehicle states, customer subscriptions and notifications, and the rental request builder. Connected them to the facade and updated the demo. |
+| Abdraissov Altair | Factory Method, Decorator | Implemented the vehicle classes and Factory Method creators, added insurance and roadside-assistance decorators, and prepared the main demonstration. |
+| Alimbayev Alisher | Strategy, Facade | Implemented hourly and daily pricing and connected vehicle creation, pricing, and extras through the facade. Created `RentalDemo` and added the van type. |
+| Assemgazy Olzhas | State, Observer, Builder | Implemented vehicle states, customer subscriptions and availability notifications, and the rental request builder. Connected them to the facade and updated the rental demo. |
 
-## Rental flow
+## UML Class Diagrams
 
-The demo starts with three vehicles and shows daily and hourly quotes. It then uses the builder to prepare a two-day car rental with insurance, roadside assistance, a customer, a pickup location, and notes. The facade calculates the price and rents the car. Trying to rent the same car again gives an error.
-
-Two customers subscribe to the car, and one unsubscribes. When the car is returned, the remaining subscriber receives a console message.
-
-A car costs 10,000 tenge per day. In the demo, two days cost 20,000 tenge, insurance adds 2,000, and roadside assistance adds 1,500. The total is 23,500 tenge. Each extra is charged once for the rental.
-
-Building a request or checking a price leaves the vehicle available. Renting changes its state to `Rented`, and returning changes it back to `Available`. Customers stay subscribed until they unsubscribe. Subscribing the same customer object twice still produces only one message per return.
-
-The rental duration is measured in days or hours, depending on the pricing strategy selected in the facade. Requests do not save that strategy or a fixed price, so the price is calculated using the current strategy. Pickup details and notes are saved as text.
-
-## UML class diagram
-
-The overview groups the main classes by responsibility. These boxes are visual groups, not Java packages. The detail diagrams show the members used by each pattern; other methods and constructors are left out to keep them readable. `RentalRequest.Builder` is a public static nested class.
+The overview groups the main classes by responsibility. These boxes are visual groups, not Java packages. The detail diagrams show the members used by each pattern; other methods and constructors are omitted to keep them readable. `RentalRequest.Builder` is a public static nested class.
 
 Solid arrows show stored references, and dotted arrows show dependencies such as method calls or parameters. Hollow triangles show inheritance or interface implementation. The filled diamond marks the notifier owned by the facade.
 
