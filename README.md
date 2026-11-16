@@ -158,3 +158,16 @@ Customers subscribe to a vehicle. After a successful return, the notifier tells 
 The builder collects rental details and creates a request that can be passed to the facade.
 
 ![Builder class diagram](docs/builder.png)
+
+
+### Strategy
+
+Strategy: Allows the rental price calculation to change between hourly and daily pricing. RentalFacade holds a PricingStrategy and delegates the base price calculation to it, and the strategy can be switched at runtime with setPricingStrategy().
+
+![Strategy class diagram](docs/strategy.png)
+
+### Facade
+
+Facade: Provides one simple interface for vehicle creation, quotes, rentals, returns, and subscriptions. RentalFacade coordinates the Factory Method creators, the pricing strategy, the decorators, the vehicle states, and the availability notifier internally.
+
+![Facade class diagram](docs/facade.png)
