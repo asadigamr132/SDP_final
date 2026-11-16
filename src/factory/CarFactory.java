@@ -1,3 +1,8 @@
+package factory;
+
+import vehicle.Car;
+import vehicle.Vehicle;
+
 public class CarFactory extends VehicleFactory {
 
     @Override

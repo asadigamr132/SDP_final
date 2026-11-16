@@ -1,3 +1,5 @@
+package offer;
+
 public class BaseRentalOffer implements RentalOffer {
     private final double price;
     private final String description;

@@ -1,3 +1,8 @@
+import facade.RentalFacade;
+import observer.VehicleObserver;
+import vehicle.Vehicle;
+import vehicle.VehicleType;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

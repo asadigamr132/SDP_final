@@ -1,3 +1,15 @@
+import facade.RentalFacade;
+import factory.CarFactory;
+import factory.VehicleFactory;
+import observer.Customer;
+import offer.Extra;
+import offer.RentalOffer;
+import pricing.DailyPricing;
+import pricing.HourlyPricing;
+import request.RentalRequest;
+import vehicle.Vehicle;
+import vehicle.VehicleType;
+
 public class Main {
 
     public static void main(String[] args) {

@@ -1,3 +1,10 @@
+import pricing.DailyPricing;
+import pricing.HourlyPricing;
+import pricing.PricingStrategy;
+import vehicle.Bike;
+import vehicle.Car;
+import vehicle.Van;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;

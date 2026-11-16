@@ -1,3 +1,5 @@
+package offer;
+
 public abstract class RentalDecorator implements RentalOffer {
 
     protected final RentalOffer rentalOffer;

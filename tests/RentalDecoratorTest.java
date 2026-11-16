@@ -1,3 +1,8 @@
+import offer.BaseRentalOffer;
+import offer.InsuranceDecorator;
+import offer.RentalOffer;
+import offer.RoadsideAssistanceDecorator;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

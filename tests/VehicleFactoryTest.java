@@ -1,3 +1,12 @@
+import factory.BikeFactory;
+import factory.CarFactory;
+import factory.VanFactory;
+import factory.VehicleFactory;
+import vehicle.Bike;
+import vehicle.Car;
+import vehicle.Van;
+import vehicle.Vehicle;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

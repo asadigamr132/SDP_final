@@ -1,3 +1,7 @@
+package observer;
+
+import vehicle.Vehicle;
+
 public class Customer implements VehicleObserver {
     private final String name;
 

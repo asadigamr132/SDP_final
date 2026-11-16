@@ -1,3 +1,11 @@
+import facade.RentalFacade;
+import observer.Customer;
+import offer.Extra;
+import offer.RentalOffer;
+import pricing.HourlyPricing;
+import request.RentalRequest;
+import vehicle.VehicleType;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

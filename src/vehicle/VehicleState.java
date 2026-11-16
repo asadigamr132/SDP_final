@@ -1,3 +1,5 @@
+package vehicle;
+
 public interface VehicleState {
     void rent(AbstractVehicle vehicle);
 

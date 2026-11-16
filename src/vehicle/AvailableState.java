@@ -1,3 +1,5 @@
+package vehicle;
+
 public class AvailableState implements VehicleState {
     @Override
     public void rent(AbstractVehicle vehicle) {

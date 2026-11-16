@@ -1,3 +1,5 @@
+package offer;
+
 public class RoadsideAssistanceDecorator extends RentalDecorator {
 
     public RoadsideAssistanceDecorator(RentalOffer rentalOffer) {

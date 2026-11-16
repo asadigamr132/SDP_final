@@ -1,3 +1,5 @@
+package vehicle;
+
 public class Van extends AbstractVehicle {
 
     public Van(int id, String model) {

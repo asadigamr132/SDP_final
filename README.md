@@ -17,7 +17,7 @@ The application uses the Java standard library. Tests use JUnit 5, which Maven d
 Open a terminal in the project root directory and compile the source files:
 
 ```bash
-javac --release 17 -d out src/*.java
+javac --release 17 -d out src/*.java src/*/*.java
 ```
 
 Run the complete demonstration:
@@ -91,34 +91,43 @@ Building a request or checking a quote does not change the vehicle state. A succ
 ```text
 src/
 ├── Main.java
-├── Vehicle.java
-├── AbstractVehicle.java
-├── Car.java
-├── Bike.java
-├── Van.java
-├── VehicleType.java
-├── VehicleFactory.java
-├── CarFactory.java
-├── BikeFactory.java
-├── VanFactory.java
-├── RentalFacade.java
-├── RentalRequest.java
-├── VehicleState.java
-├── AvailableState.java
-├── RentedState.java
-├── VehicleObserver.java
-├── AvailabilityNotifier.java
-├── Customer.java
-├── PricingStrategy.java
-├── HourlyPricing.java
-├── DailyPricing.java
-├── Extra.java
-├── RentalOffer.java
-├── BaseRentalOffer.java
-├── RentalDecorator.java
-├── InsuranceDecorator.java
-└── RoadsideAssistanceDecorator.java
+├── vehicle/
+│   ├── Vehicle.java
+│   ├── AbstractVehicle.java
+│   ├── Car.java
+│   ├── Bike.java
+│   ├── Van.java
+│   ├── VehicleType.java
+│   ├── VehicleState.java
+│   ├── AvailableState.java
+│   └── RentedState.java
+├── factory/
+│   ├── VehicleFactory.java
+│   ├── CarFactory.java
+│   ├── BikeFactory.java
+│   └── VanFactory.java
+├── pricing/
+│   ├── PricingStrategy.java
+│   ├── HourlyPricing.java
+│   └── DailyPricing.java
+├── offer/
+│   ├── RentalOffer.java
+│   ├── BaseRentalOffer.java
+│   ├── RentalDecorator.java
+│   ├── InsuranceDecorator.java
+│   ├── RoadsideAssistanceDecorator.java
+│   └── Extra.java
+├── observer/
+│   ├── VehicleObserver.java
+│   ├── AvailabilityNotifier.java
+│   └── Customer.java
+├── request/
+│   └── RentalRequest.java
+└── facade/
+    └── RentalFacade.java
 ```
+
+The folders inside `src/` are Java packages. The vehicle states stay in `vehicle` so they can call the package-private `setState()` method. `Main` stays directly in `src/`.
 
 `tests/` contains the JUnit tests, `pom.xml` configures Maven, and `docs/` contains the UML images.
 
@@ -132,7 +141,7 @@ src/
 
 ## UML class diagrams
 
-The overview groups the main classes by responsibility. These boxes are visual groups, not Java packages. The detail diagrams show the members used by each pattern; other methods and constructors are omitted to keep them readable. `RentalRequest.Builder` is a public static nested class.
+The overview groups the main classes by responsibility. These boxes are visual groups, not Java packages. Class names are shown without their package prefixes. The detail diagrams show the members used by each pattern; other methods and constructors are omitted to keep them readable. `RentalRequest.Builder` is a public static nested class.
 
 Solid lines with open arrowheads show stored references. Dashed arrows show dependencies such as method calls, parameters, or object creation. A hollow triangle with a solid line shows inheritance; a hollow triangle with a dashed line shows interface implementation. The filled diamond marks the notifier owned by the facade.
 

@@ -1,3 +1,22 @@
+package facade;
+
+import factory.BikeFactory;
+import factory.CarFactory;
+import factory.VanFactory;
+import factory.VehicleFactory;
+import observer.AvailabilityNotifier;
+import observer.VehicleObserver;
+import offer.BaseRentalOffer;
+import offer.Extra;
+import offer.InsuranceDecorator;
+import offer.RentalOffer;
+import offer.RoadsideAssistanceDecorator;
+import pricing.DailyPricing;
+import pricing.PricingStrategy;
+import request.RentalRequest;
+import vehicle.Vehicle;
+import vehicle.VehicleType;
+
 import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;

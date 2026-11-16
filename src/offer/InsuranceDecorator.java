@@ -1,3 +1,5 @@
+package offer;
+
 public class InsuranceDecorator extends RentalDecorator {
 
     public InsuranceDecorator(RentalOffer rentalOffer) {

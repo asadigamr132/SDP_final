@@ -1,3 +1,6 @@
+import facade.RentalFacade;
+import vehicle.VehicleType;
+
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 

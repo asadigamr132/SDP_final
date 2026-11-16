@@ -1,3 +1,7 @@
+package pricing;
+
+import vehicle.Vehicle;
+
 public class HourlyPricing implements PricingStrategy {
 
     @Override

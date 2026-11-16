@@ -1,3 +1,8 @@
+package request;
+
+import observer.Customer;
+import offer.Extra;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

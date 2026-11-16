@@ -1,3 +1,5 @@
+package vehicle;
+
 public abstract class AbstractVehicle implements Vehicle {
 
     protected final int id;

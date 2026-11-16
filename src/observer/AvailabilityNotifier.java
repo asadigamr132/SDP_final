@@ -1,3 +1,7 @@
+package observer;
+
+import vehicle.Vehicle;
+
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
