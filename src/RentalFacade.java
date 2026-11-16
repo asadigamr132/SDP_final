@@ -38,6 +38,22 @@ public class RentalFacade {
         vehicle.rent();
         return offer;
     }
+    public RentalOffer getQuote(RentalRequest request) {
+        RentalOffer offer = getQuote(request.getVehicleId(), request.getUnits(),
+                request.getExtras().toArray(new Extra[0]));
+        String description = offer.getDescription()
+                + ", Customer: " + request.getCustomer().getName()
+                + ", Pickup: " + request.getPickupLocation();
+        if (!request.getNotes().isBlank()) {
+            description += ", Notes: " + request.getNotes();
+        }
+        return new BaseRentalOffer(offer.getPrice(), description);
+    }
+    public RentalOffer rentVehicle(RentalRequest request) {
+        RentalOffer offer = getQuote(request);
+        findVehicle(request.getVehicleId()).rent();
+        return offer;
+    }
     public void returnVehicle(int vehicleId) {
         Vehicle vehicle = findVehicle(vehicleId);
         vehicle.returnVehicle();

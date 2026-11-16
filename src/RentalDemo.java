@@ -12,7 +12,14 @@ public class RentalDemo {
         print(facade.getQuote(1, 5));
 
         facade.setPricingStrategy(new DailyPricing());
-        print(facade.rentVehicle(1, 2, Extra.INSURANCE, Extra.ROADSIDE_ASSISTANCE));
+        Customer renter = new Customer("Altair");
+        RentalRequest request = new RentalRequest.Builder(renter, 1, 2)
+                .addExtra(Extra.INSURANCE)
+                .addExtra(Extra.ROADSIDE_ASSISTANCE)
+                .pickupLocation("Astana airport")
+                .notes("Pickup at 10:00")
+                .build();
+        print(facade.rentVehicle(request));
         System.out.println("Vehicle 1 state: " + facade.getVehicleState(1));
 
         try {
