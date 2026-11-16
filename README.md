@@ -25,7 +25,7 @@ Run the complete demonstration:
 java -cp out Main
 ```
 
-**Run `Main` for the full demonstration.** It first shows Factory Method and Decorator, then starts `RentalDemo`, which demonstrates the complete rental flow through the facade.
+**Run `Main` for the full demonstration of all seven design patterns.** The entry point demonstrates Factory Method, Strategy, Builder, Facade, Decorator, Observer, and State in one rental scenario. `RentalDemo` remains available as a separate focused rental-flow example.
 
 You can also run only the rental-system scenario:
 
